@@ -3,26 +3,17 @@ import { useFind, useSubscribe } from 'meteor/react-meteor-data';
 import { ProfileCollection } from '../api/profile';
 
 export const Profile = () => {
-  // if(isLoading()) {
-  //   return <div>Loading...</div>;
-  // }
+  const isLoading = useSubscribe('profile');
+  const profile = useFind(() => ProfileCollection.find());
 
-  handleGetProfile = () =>{
-    Meteor.call('binance.getAccountData', (error, result) => {
-      if (error) {
-        console.error(error);
-      } else {
-        //this.accountData.set(result);
-
-        console.log(result);
-      }
-    });
-  };
+  if(isLoading()) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
-      <h2>Profile!</h2>
-      <button onClick={handleGetProfile}>Get Profile</button>
+      <h2>Profile</h2>
+      <pre>{JSON.stringify(profile)}</pre>
     </div>
   );
 };

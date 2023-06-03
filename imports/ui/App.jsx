@@ -1,13 +1,11 @@
 import React from 'react';
-import { Hello } from './Hello.jsx';
+import { Sync } from './Sync.jsx';
 import { Profile } from './Profile.jsx';
-import { Info } from './Info.jsx';
 
 export const App = () => (
   <div>
-    <h1>Welcome to Meteor!</h1>
-    <Hello/>
+    <h1>Binance Profile Sync</h1>
+    <Sync/>
     <Profile/>
-    <Info/>
   </div>
 );

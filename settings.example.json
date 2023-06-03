@@ -1,0 +1,10 @@
+{
+    "binance": {
+        "baseUrl": "https://testnet.binance.vision",
+        "apiKey": "YOUR_BINANCE_API_KEY",
+        "secretKey": "YOUR_BINANCE_SECRET_KEY",
+        "endpoints": {
+            "getAccountData": "/api/v3/account"
+        }
+    }
+}
