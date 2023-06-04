@@ -21,10 +21,10 @@ export const Sync = () => {
   };
 
   return (
-    <div>
-      <h2>Profile</h2>
-      <button onClick={handleSyncProfile}>Sync Profile</button>
-      <span>Error:{""}</span>
+    <div className='row'>
+      <div className='col-12'>
+      <button onClick={handleSyncProfile} className='btn btn-primary'>Sync Profile</button>
+      </div>        
     </div>
   );
 };
