@@ -1,0 +1,7 @@
+**/node_modules
+**/.meteor/local
+Dockerfile
+.git
+.gitignore
+settings-dev.json
+settings.example.json

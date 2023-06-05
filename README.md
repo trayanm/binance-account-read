@@ -2,14 +2,17 @@
 The objective of this project is to showcase the practical application of `meteor`. The project highlights the following key concepts:
 - `methods` - remote functions that `meteor` clients can invoke with `Meteor.call`
 - `publish` and `subscribe` - `meteor` servers publish sets of records, allowing clients to subscribe to these sets
-- settings - set a `settings.json` structure to handle app configuration and settings
+- settings - set custom configuration structure in `settings-dev.json`
+
+# Before you start
+Obtain API key and Secret key from https://testnet.binance.vision
 
 # Tech stack
-- meteor
+- meteor 2.12
 - Node.js version >= 10 and <= 14
 - react 18.2.0
 
-# Using NVM to handle Node.js version
+# Using NVM to handle Node.js versions
 You can handle different Node.js version with `nvm`.
 
 - Install Node.js version 12 (or other version >= 10 and <= 14)
@@ -29,23 +32,63 @@ node -v
 You should se something like `v12.22.12`
 
 # Settings
-Create a file with name `settings.json` with the following content and configuration:
+Create a file with name `settings-dev.json` with the following content and configuration:
 ```js
 {
-    "binanceApiKey": "YOUR_BINANCE_API_KEY", // your binance API key, that is obtained via
-    "binanceSecretKey": "YOUR_BINANCE_SECRET_KEY"
+    "binance": {
+        "baseUrl": "https://testnet.binance.vision",
+        "apiKey": "YOUR_BINANCE_API_KEY",
+        "secretKey": "YOUR_BINANCE_SECRET_KEY",
+        "endpoints": {
+            "getAccountData": "/api/v3/account"
+        }
+    }
 }
 ```
 
+# Running on dev environment
 
-# Running the application
+- Set the necessary settings in file `settings-dev.json`
 
-- install dependencies
+-  Install dependencies
 ```
 meteor npm install
 ```
 
-- Run the application
+-  Run the application
 ```
-meteor run --settings settings.json
+meteor run --settings settings-dev.json
 ```
+
+# Running with Docker
+
+- Update `docker-compose.yml` with Meteor settings in `environment` variable `METEOR_SETTINGS`. The value of this variable should be `JSON.stringify(...)` of the file `settings-dev.json`.
+```yaml
+# ...
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '80:3000'
+    depends_on:
+      - mongo
+    environment:
+      ROOT_URL: ${APP_ROOT_URL:-http://localhost}
+      MONGO_URL: mongodb://mongo:27017/meteor
+      METEOR_SETTINGS: '{"binance":{"baseUrl":"https://testnet.binance.vision","apiKey":"YOUR_BINANCE_API_KEY","secretKey":"YOUR_BINANCE_SECRET_KEY","endpoints":{"getAccountData":"/api/v3/account"}}}'
+      PORT: 3000
+# ...
+```
+
+- Build docker compose
+```
+docker-compose build
+```
+
+- Run docker compose
+```
+docker-compose up
+```
+
+- To open the docker web application, navigate to http://localhost
