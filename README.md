@@ -3,6 +3,7 @@ The objective of this project is to showcase the practical application of `meteo
 - `methods` - remote functions that `meteor` clients can invoke with `Meteor.call`
 - `publish` and `subscribe` - `meteor` servers publish sets of records, allowing clients to subscribe to these sets
 - settings - set custom configuration structure in `settings-dev.json`
+- testing - simple test environment with `mocha`
 
 # Before you start
 Obtain API key and Secret key from https://testnet.binance.vision
@@ -29,7 +30,7 @@ nvm use 12
 ```
 node -v
 ```
-You should se something like `v12.22.12`
+You should see something like `v12.22.12`
 
 # Settings
 Create a file with name `settings-dev.json` with the following content and configuration:
@@ -58,6 +59,12 @@ meteor npm install
 -  Run the application
 ```
 meteor run --settings settings-dev.json
+```
+
+# Running tests
+- To execute the tests, run the following command
+```
+meteor test --driver-package meteortesting:mocha
 ```
 
 # Running with Docker
