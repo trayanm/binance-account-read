@@ -1,5 +1,5 @@
 # Overview
-The objective of this project is to showcase the practical application of `meteor`. The project highlights the following key concepts:
+The objective of this project is to demonstrate a practical application of `meteor`. The project highlights the following key concepts:
 - `methods` - remote functions that `meteor` clients can invoke with `Meteor.call`
 - `publish` and `subscribe` - `meteor` servers publish sets of records, allowing clients to subscribe to these sets
 - settings - set custom configuration structure in `settings-dev.json`
